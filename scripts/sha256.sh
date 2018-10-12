@@ -1,8 +1,12 @@
+hashFile=~/Scalable-Computing/hashes/sha256.txt
+outputfile=sha256cracked.txt
+hashCode=7400
+
 # sha256 rockyou
-hashcat -m 7400 -a 0 -w 4 -O -o sha256cracked.txt ~/Scalable-Computing/hashes/sha256.txt rockyou.txt --rules=rules/best64.rule
+hashcat -m $hashCode -w4 -O --remove -o $outputfile $hashFile ~/rockyou.txt
 
 # sha256 combination attack 
-hashcat -m 7400 -a 1 -w 4 -O -o sha256cracked.txt ~/Scalable-Computing/hashes/sha256.txt ~/Scalable-Computing/words2.txt 
+hashcat -m $hashCode -w4 -a0 -O --remove -o $outputfile $hashFile ~/words2.txt
 
 # 5 lower case letters
-hashcat -m 7400 -a 3 -w 4 -O -o sha256cracked.txt ~/Scalable-Computing/hashes/sha256.txt ?l?l?l?l?l
+hashcat -m $hashCode -a 3 -w4 --remove -o $outputfile $hashFile ?l?l?l?l?l

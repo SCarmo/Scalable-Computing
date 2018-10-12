@@ -1,6 +1,6 @@
-hashFile=~/Scalable-Computing/hashes/DES.txt
-outputfile=DEScracked.txt
-hashCode=1500
+hashFile=~/Scalable-Computing/hashes/md5c.txt
+outputfile=MD5cracked.txt
+hashCode=500
 
 # sha256 rockyou
 hashcat -m $hashCode --remove -w 4 -O -o $outputfile $hashFile ~/rockyou.txt
