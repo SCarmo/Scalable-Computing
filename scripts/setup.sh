@@ -1,31 +1,30 @@
-#!/bin/bash
-
-# bash script to execute while on AWS instance
-
-# run:
-# sudo /bin/bash NVIDIA-Linux-x86_64-396.44.run
-#to setup gpu
-
-
-#hashcat set-up
-cd ~/
+sudo add-apt-repository ppa:graphics-drivers/ppa
 sudo apt update
-sudo apt install cmake build-essential
-sudo apt install checkinstall git
-sudo apt remove hashcat
-sudo apt build-dep hashcat
-sudo rm -rf hashcat
+sudo apt install gcc build-essential git automake yasm libgmp-dev libpcap-dev pkg-config libssl-dev libevent-dev libncurses5-dev libbz2-dev zlib1g-dev nvidia-opencl-dev libopenmpi-dev openmpi-bin -y
+
 git clone https://github.com/hashcat/hashcat.git
-cd hashcat
+cd ./hashcat
 git submodule update --init
-sudo make
-sudo checkinstall
-hashcat --version
-cd ~/
+make 
+sudo make install
+cd ..
 
-# Now to get rockyou.txt & drivers
-wget https://github.com/brannondorsey/naive-hashcat/releases/download/data/rockyou.txt
+rm -fr /tmp/tmux
+git clone https://github.com/tmux/tmux.git /tmp/tmux
+cd /tmp/tmux
+sh autogen.sh
+./configure && make
+sudo make install
+cd -
+rm -fr /tmp/tmux
 
-# git clone my repo to get access to files
+sudo reboot
 
-git clone https://github.com/SCarmo/Scalable-Computing.git
+mkdir -p ~/JohnTheRipper
+cd ~/JohnTheRipper
+git clone git://github.com/magnumripper/JohnTheRipper -b bleeding-jumbo john
+cd ~/JohnTheRipper/john/src
+./configure --enable-mpi && make -s clean && make -sj4
+../run/john --test
+
+sudo reboot
