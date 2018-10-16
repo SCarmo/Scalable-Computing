@@ -1,39 +1,39 @@
+
+# DES
+echo "------------------DES------------------"
 hashFile=~/Scalable-Computing/hashes/DES.txt
-outputfile=DEScracked.txt
+outputfile=AllCracked.txt
 hashCode=1500
 
-# DES rockyou
-hashcat -m $hashCode --remove -w 4 -O -o $outputfile $hashFile ~/rockyou.txt
+hashcat -m $hashCode  -w 4 -O -o $outputfile $hashFile ~/allpasswords.txt
 
-# DES combination attack 
-hashcat -m $hashCode -w4 --remove -O -o $outputfile $hashFile ~/words2.txt
-
-# 5 lower case letters
-hashcat -m $hashCode --remove -a3 -w4 -o $outputfile $hashFile ?l?l?l?l?l
-
-
-hashFile=~/Scalable-Computing/hashes/sha256.txt
-outputfile=sha256cracked.txt
-hashCode=7400
-
-# sha256 rockyou
-hashcat -m $hashCode -w4 -O --remove -o $outputfile $hashFile ~/rockyou.txt
-
-# sha256 combination attack 
-hashcat -m $hashCode -w4 -O --remove -o $outputfile $hashFile ~/words2.txt
-
-# 5 lower case letters
-hashcat -m $hashCode -a 3 -w4 --remove -o $outputfile $hashFile ?l?l?l?l?l
-
+# MD5
+echo "------------------MD5------------------"
 hashFile=~/Scalable-Computing/hashes/md5c.txt
-outputfile=MD5cracked.txt
 hashCode=500
 
-# MD5 rockyou
-hashcat -m $hashCode --remove -w 4 -O -o $outputfile $hashFile ~/rockyou.txt
+hashcat -m $hashCode  -w 4 -O -o $outputfile $hashFile ~/allpasswords.txt
 
-# MD5 combination attack 
-hashcat -m $hashCode -w4 --remove -O -o $outputfile $hashFile ~/words2.txt
+# sha256
+echo "------------------SHA256------------------"
+hashFile=~/Scalable-Computing/hashes/sha256.txt
+hashCode=7400
 
-# 5 lower case letters
-hashcat -m $hashCode --remove -a3 -w4 -o $outputfile $hashFile ?l?l?l?l?l
+hashcat -m $hashCode -w4 -O  -o $outputfile $hashFile ~/allpasswords.txt
+
+
+# sha512 
+echo "------------------SHA512------------------"
+hashFile=~/Scalable-Computing/hashes/sha512.txt
+hashCode=1800
+
+
+hashcat -m $hashCode  -w 4 -O -o $outputfile $hashFile ~/allpasswords.txt
+
+# pbk
+echo "------------------pbk------------------"
+~/src/john/run/john ~/Scalable-Computing/hashes/pbkdf2-HMAC-SHA256.txt --wordlist=allpasswords.txt --pot=AllCracked.txt
+
+#argon
+echo "------------------argon2 baby------------------"
+~/src/john/run/john ~/Scalable-Computing/hashes/argon2.txt --wordlist=allpasswords.txt --pot=AllCracked.txt
