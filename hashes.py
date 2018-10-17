@@ -1,7 +1,5 @@
 hashes = "scarmody.hashes"
 
-folder = "hashes"
-
 argon2 = open("hashes/argon2.txt",'w')
 sha512 = open("hashes/sha512.txt", 'w')
 sha256 = open("hashes/sha256.txt", 'w')
