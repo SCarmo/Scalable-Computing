@@ -23,6 +23,9 @@ sudo /bin/bash NVIDIA-Linux-x86_64-396.44.run
 echo "This may take a while..."
 wget https://crackstation.net/files/crackstation.txt.gz
 
+# filter crackstation
+egrep -a "^[[:alnum:]]{5,8}$" crackstation.txt > layer9.txt
+
 # unzip
 gunzip crackstation.txt.gz crackstation.txt
 mkdir -p ~/JohnTheRipper
@@ -30,6 +33,7 @@ cd ~/JohnTheRipper
 git clone git://github.com/magnumripper/JohnTheRipper -b bleeding-jumbo john
 cd ~/JohnTheRipper/john/src
 ./configure --enable-mpi && make -s clean && make -sj4
-../run/john --test
+
+
 
 sudo reboot
