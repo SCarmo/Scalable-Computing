@@ -19,6 +19,10 @@ wget http://us.download.nvidia.com/tesla/396.44/NVIDIA-Linux-x86_64-396.44.run
 # install driver
 sudo /bin/bash NVIDIA-Linux-x86_64-396.44.run
 
+
+# unzip
+gunzip crackstation.txt.gz crackstation.txt
+
 # get crackstation
 echo "This may take a while..."
 wget https://crackstation.net/files/crackstation.txt.gz
@@ -26,8 +30,8 @@ wget https://crackstation.net/files/crackstation.txt.gz
 # filter crackstation
 egrep -a "^[[:alnum:]]{5,8}$" crackstation.txt > layer9.txt
 
-# unzip
-gunzip crackstation.txt.gz crackstation.txt
+
+
 mkdir -p ~/JohnTheRipper
 cd ~/JohnTheRipper
 git clone git://github.com/magnumripper/JohnTheRipper -b bleeding-jumbo john
